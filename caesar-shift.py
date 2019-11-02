@@ -9,21 +9,23 @@ if len(sys.argv) != 3:
 fileDirectory=str(sys.argv[2])
 shiftNum=int(sys.argv[1]) # var shiftNum is the number of shifts
 
-def doShift(value,shift):
+def doShift(value, shift):
 	done = value + shift % 90
 	if done > 90:
-		done-=26
+		done -= 26
 	return done
 
-with open(fileDirectory,"r") as file1:	# opens the file
-	while True:
-		charecter = file1.read(1)
-		if not charecter:
-			break
-		charecter=charecter.upper()
+if __name__ == "__main__":
+	
+	with open(fileDirectory,"r") as file:	# opens the file
+		while True:
+			character = file.read(1)
+			if not character:
+			  break
+			unicode = ord(character.upper())
 
-		if ord(charecter) <= 90 and ord(charecter) >= 65:
-			result=chr(doShift(ord(charecter),shiftNum))
-		else:
-			result = charecter
-		sys.stdout.write(result)
+			if unicode <= 90 and unicode >= 65:
+				result = chr(doShift(unicode, shiftNum))
+			else:
+				result = chr(unicode) # Converts unicode ID back to char
+			sys.stdout.write(result)
